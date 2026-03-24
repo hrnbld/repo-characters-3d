@@ -245,6 +245,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
+        // Wait for Three.js to load
+        if (typeof THREE === 'undefined') {
+            document.getElementById('loading').innerHTML = '<div style="color:white;text-align:center;"Error loading 3D. Please refresh.</div>';
+            throw new Error('Three.js not loaded');
+        }
+        
+        // Hide loading immediately when script starts
+        setTimeout(() => {
+            document.getElementById('loading').classList.add('hidden');
+        }, 500);
+        
         // Scene Setup
         const scene = new THREE.Scene();
         scene.fog = new THREE.Fog(0x1a1a2e, 20, 100);
@@ -694,10 +705,10 @@
             }
         });
         
-        // Hide loading
+        // Hide loading quickly
         setTimeout(() => {
             document.getElementById('loading').classList.add('hidden');
-        }, 1500);
+        }, 800);
         
         // Start animation
         animate();
